@@ -1,0 +1,28 @@
+<form [formGroup]="uploadForm" (ngSubmit)="submit()">
+    <!-- Select File -->
+    <input type="file" accept="image/*" (change)="showPreview($event)" />
+  
+    <!-- Image Preview -->
+    <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+      <img [src]="imageURL" width="300px" height="200px" [alt]="uploadForm.value.name">
+    </div>
+  
+    <!-- Assign Image Alt -->
+    <input formControlName="name" placeholder="Enter name">
+  
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Bob" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="avatar">Avatar</label>
+      <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+     
+    </div>
+    <button type="submit"  class="btn btn-success">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+  </form> -->
+  

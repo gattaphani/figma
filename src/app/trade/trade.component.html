@@ -1,0 +1,199 @@
+<nav>
+  <div class="logo">
+    <h4><span class="dark">trade</span><span class="light">leaves</span></h4>
+  </div>
+  <ul class="nav-links">
+    <li><a class="btn" href="#">Place an ad</a></li>
+    <li><a href="#">Buyer Inquiries</a></li>
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+</nav>
+
+<div class="banner">
+  <h2>suyog enterprises</h2>
+  <p>verified supplier</p>
+</div>
+
+<div class="container">
+  <h6>Showing all products</h6>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card" *ngFor="let e of posts;let i=index">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <img class="image" src="{{ e.image }}" alt="Image" height="250px" width="200px" />
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                <p>{{ e.productName | slice: 0:20 }}</p>
+                <a class="remove" (click)="deleteTrade(e.id)">Remove Product</a>
+                <p>{{ e.attributes.Material }}</p>
+                <p>{{ e.attributes.Color }}</p>
+                <p>{{ e.attributes.Brand }}</p>
+                <p>{{ e.minOrders }}</p>
+                <p>{{ e.deliveryTime }}</p>
+                <p>{{ e.location }}</p>
+                <p>{{ e.productRating }}</p>
+                <p>{{ e.productPrice }},{{i}}</p>
+              </div>
+
+              <app-child (data)="recieveData($event)"> </app-child>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Add Product
+      </button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+        Remove Product
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form [formGroup]="tradeForm" (ngSubmit)="createTrade()" novalidate>
+              <div class="form-group">
+                <label for="productName">productName</label>
+                <input type="text" name="productName" class="form-control" formControlName="productName" />
+                 <!-- <span *ngIf="
+                    productName.errors?.required &&
+                    productName.touched &&
+                    productName.invalid
+                  " class="alert">
+                  productName
+                </span>  -->
+              </div>
+              <div formGroupName="attributes">
+                <div class="form-group">
+                  <label for="Material">Material</label>
+                  <input type="text" name="Material"  class="form-control" formControlName="Material" />
+                  <!-- <span *ngIf="
+                      Material.errors?.required &&
+                      Material.touched &&
+                      Material.invalid
+                    " class="alert">
+                    Material
+                  </span> -->
+                </div>
+                <div class="form-group">
+                  <label for="Color">Color</label>
+                  <input type="text"  name="Color" class="form-control" formControlName="Color" />
+                  <!-- <span *ngIf="
+                      Color.errors?.required && Color.touched && Color.invalid
+                    " class="alert">
+                    Color
+                  </span> -->
+                </div>
+                <div class="form-group">
+                  <label for="Brand">Brand</label>
+                  <input type="text"  name="Brand" class="form-control" formControlName="Brand" />
+                  <!-- <span *ngIf="
+                      Brand.errors?.required && Brand.touched && Brand.invalid
+                    " class="alert">
+                    Brand
+                  </span> -->
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Color">image</label>
+                
+                <!-- <input type="file"  (change)="onFileChange($event)" formControlName="image"> -->
+                <input type="text" name="image" class="form-control" formControlName="image" />
+                <!-- <span *ngIf="
+                    image.errors?.required && image.touched && image.invalid
+                  " class="alert">
+                  image
+                </span> -->
+              </div>
+              <div class="form-group">
+                <label for="Color">minOrders</label>
+                <input type="text" name="minOrders" class="form-control" formControlName="minOrders" />
+                <!-- <span *ngIf="
+                    minOrders.errors?.required &&
+                    minOrders.touched &&
+                    minOrders.invalid
+                  " class="alert">
+                  minOrders
+                </span> -->
+              </div>
+
+              <div class="form-group">
+                <label for="Color">deliveryTime</label>
+                <input type="text" name="deliveryTime" class="form-control" formControlName="deliveryTime" />
+                <!-- <span *ngIf="
+                    deliveryTime.errors?.required &&
+                    deliveryTime.touched &&
+                    Brand.invalid
+                  " class="alert">
+                  deliveryTime
+                </span> -->
+              </div>
+              <div class="form-group">
+                <label for="Color">location</label>
+                <input type="text" name="location" class="form-control" formControlName="location" />
+                <!-- <span *ngIf="
+                    location.errors?.required &&
+                    location.touched &&
+                    location.invalid
+                  " class="alert">
+                  location
+                </span> -->
+              </div>
+              <div class="form-group">
+                <label for="Color">productRating</label>
+                <input type="text" name="productRating" class="form-control" formControlName="productRating" />
+                <!-- <span *ngIf="
+                    productRating.errors?.required &&
+                    productRating.touched &&
+                    productRating.invalid
+                  " class="alert">
+                  productRating
+                </span> -->
+              </div>
+              <div class="form-group">
+                <label for="Color">productPrice</label>
+                <input type="text" name="productPrice" class="form-control" formControlName="productPrice" />
+                <!-- <span *ngIf="
+                    productPrice.errors?.required &&
+                    productPrice.touched &&
+                    productPrice.invalid
+                  " class="alert">
+                  productPrice
+                </span> -->
+              </div>
+              <button type="submit" class="btn btn-success" >
+                Submit
+              </button>
+              <button type="button"  data-dismiss="modal" class="btn btn-secondary">
+                Close
+              </button>
+            </form>
+            <pre>{{ tradeForm.value }}</pre>
+            <pre>{{ tradeForm.status }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
